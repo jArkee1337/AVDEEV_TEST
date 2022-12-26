@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %} Результаты теста {{ collection.name_of_set }} {% endblock %}
+{% block content %}
+
+<div class="card" style="width: 18rem;">
+    <div class="card-header">
+        Название теста: {{ collection.name_of_set }}
+    </div>
+    <ul class="list-group list-group-flush">
+
+        <li class="list-group-item">Правильных ответов: {{ right }}</li>
+        <li class="list-group-item">Процент правильных ответов: {{ percent }}</li>
+        <li class="list-group-item"><a href="{% url 'polls' %}">К списку тестов</a></li>
+        <li class="list-group-item"><a href="{% url 'one_question' collection.id %}">Пройти еще раз</a></li>
+
+
+    </ul>
+</div>
+
+
+{% endblock %}

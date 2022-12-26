@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %} {{ list_of_questions.0.collection.name_of_set }} {% endblock %}
+{% block content %}
+<div class="card" style="width: 18rem;">
+    <div class="card-header">
+        Список вопросов
+    </div>
+    <ul class="list-group list-group-flush">
+        {% for question in list_of_questions %}
+        <li class="list-group-item">{{ question.question_text }}</li>
+        {% endfor %}
+    </ul>
+    <div class="card-header">
+        <a href="{% url 'one_question' list_of_questions.0.id %}">Приступить к прохождению теста</a>
+    </div>
+</div>
+
+{% endblock %}

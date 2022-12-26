@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %} Список тестов {% endblock %}
+{% block content %}
+
+
+<div class="card" style="width: 18rem;">
+    <div class="card-header">
+        Список тестов
+    </div>
+    <ul class="list-group list-group-flush">
+        {% for poll in polls %}
+        <li class="list-group-item"><a href="{% url 'questions' poll.id %}">{{ poll.name_of_set }}</a></li>
+        {% endfor %}
+
+    </ul>
+</div>
+
+
+{% endblock %}
+

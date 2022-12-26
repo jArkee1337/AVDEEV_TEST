@@ -1,0 +1,25 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+    <div class="container-fluid">
+        <a class="navbar-brand" href="{% url 'polls' %}">Сайт для прохождения тестов</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+
+
+            <span class="navbar-text">
+
+            {% if request.user.is_authenticated %}
+             Добро пожаловать, {{ user.username }} | <a href="{% url 'logout' %}">Выход</a>
+
+             {% else %}
+             <a href="{% url 'register' %}">Регистрация </a> | <a href="{% url 'login' %}">Авторизация</a>
+            {% endif %}
+
+         </span>
+
+        </div>
+
+</nav>
