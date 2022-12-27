@@ -61,9 +61,9 @@ def question(request, question_id):
         right_answers_number = question.check_amount_of_right_answers()
 
         try:
-            selected_answers = question.answers.filter(pk__in=dict(request.POST)['answer'])
+            selected_answers = question.answers.filter(
+                pk__in=dict(request.POST)['answer']).select_related('question')
 
-            print(selected_answers)
         except KeyError as exception:
 
             return render(request, 'polls/question_page.html', {
@@ -81,7 +81,7 @@ def question(request, question_id):
                 collection.right_answers += 1
                 collection.save()
 
-            all_questions = collection.questions.all()
+            all_questions = collection.questions.all().select_related('collection')
             all_questions_list = list(all_questions)
             try:
                 next_question_index_in_list = all_questions_list.index(question) + 1
@@ -103,7 +103,7 @@ def finish(request, collection_id):
 
 
 def list_of_questions(request, collection_id):
-    qs = Question.objects.filter(collection=collection_id)
+    qs = Question.objects.filter(collection=collection_id).select_related('collection')
     context = {"list_of_questions": qs}
 
     return render(request, 'polls/list_of_questions.html', context=context)
