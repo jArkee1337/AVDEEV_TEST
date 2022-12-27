@@ -1,21 +1,22 @@
 {% extends 'base.html' %}
-
 {% block title %} {{ question.collection.name_of_set }} вопрос: {{ question.question_text }} {% endblock %}
 {% block content %}
 
-
 <form action="{% url 'one_question' question.id %}" method="post">
     {% csrf_token %}
+
     <fieldset>
         <legend><h2>Вопрос: {{ question.question_text }}</h2></legend>
         <legend><p>Варианты ответов:</p></legend>
+
         {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
         {% for answer in question.answers.all %}
         <input type="checkbox" name="answer" id="answer{{ forloop.counter }}" value="{{ answer.id }}">
         <label for="answer{{ forloop.counter }}">{{ answer.answer_text }}</label><br>
         {% endfor %}
     </fieldset>
-    <input type="submit" value="Next answer">
-</form>
 
+    <input type="submit" value="Далее">
+</form>
 {% endblock %}

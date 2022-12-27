@@ -1,21 +1,24 @@
 {% extends 'base.html' %}
-
 {% block title %} Список тестов {% endblock %}
 {% block content %}
-
 
 <div class="card" style="width: 18rem;">
     <div class="card-header">
         Список тестов
     </div>
+
+    {% if request.user.is_authenticated %}
     <ul class="list-group list-group-flush">
         {% for poll in polls %}
         <li class="list-group-item"><a href="{% url 'questions' poll.id %}">{{ poll.name_of_set }}</a></li>
         {% endfor %}
-
     </ul>
+
+    {% else %}
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">Для просмотра списка тестов необходимо авторизоваться</li>
+    </ul>
+    {% endif %}
 </div>
-
-
 {% endblock %}
 

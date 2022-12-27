@@ -1,8 +1,6 @@
 from django import forms
 from django.contrib import admin
-from django.core.exceptions import ValidationError
-
-from .models import *
+from .models import Answer, Question, SetOfQuestions
 
 
 class AnswerInlineFormset(forms.models.BaseInlineFormSet):
@@ -14,9 +12,9 @@ class AnswerInlineFormset(forms.models.BaseInlineFormSet):
                     counter += 1
             if counter < 1:
                 raise forms.ValidationError('There must be one correct answer!')
-            elif counter == len(self.forms):
+            if counter == len(self.forms):
                 raise forms.ValidationError("All answers cannot be correct!")
-        except KeyError as e:
+        except KeyError:
             pass
 
 
@@ -38,6 +36,5 @@ class SetOfQuestionsAdmin(admin.ModelAdmin):
     readonly_fields = ('right_answers',)
 
 
-# admin.site.register(Answer, AnswerAdmin)
 admin.site.register(Question, QuestionAdmin)
 admin.site.register(SetOfQuestions, SetOfQuestionsAdmin)
